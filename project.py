@@ -1,15 +1,17 @@
-def my_superfunction():
-    print('What an awesome print!')
-    print(1)
+import os
+
+from flask import Flask
+from flask_ngrok import run_with_ngrok
+
+app = Flask(__name__)
+run_with_ngrok(app)
 
 
-def main():
-    print('My first git program')
-    print('And I change it every day')
-    print('Again')
-    print('UFO came and added this line')
-    my_superfunction()
+@app.route("/")
+def index():
+    return "Привет от нашего веб-приложения"
 
 
 if __name__ == '__main__':
-    main()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
